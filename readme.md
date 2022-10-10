@@ -9,5 +9,16 @@ Please find more info about each part in the relevant Readme file ([frontend](fr
 When implementing a new feature or fixing a bug, please create a new pull request against `main` from a feature/bug branch and add `@vanessa-cooper` as reviewer.
 
 ## First setup
+Connect your github account, and approve your invitation (Navi will send you the links).
 
-**[TODO 05/01/2018 @vanessa-cooper]:** _It's been a while since anyone ran a fresh copy of this repo. I think it's worth documenting the steps needed to install and run the repo on a new machine?_
+## Second setup
+Clone the repo to your local machine
+
+## Third setup
+Create your own codespace (Ness will send you a link). No need to change anything in the default options, just click on the Create codespace button and wait for it to boot.
+
+## Fourth setup
+Run docker-compose up in your codespace's terminal to load Anythink's backend and frontend.
+
+## Fifth setup
+Create a new user on Anything (Ness will send you the link).
