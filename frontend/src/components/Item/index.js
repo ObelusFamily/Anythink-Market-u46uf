@@ -5,48 +5,48 @@ import agent from "../../agent";
 import { connect } from "react-redux";
 import marked from "marked";
 import {
-  ITEM_PAGE_LOADED,
-  ITEM_PAGE_UNLOADED,
+    ITEM_PAGE_LOADED,
+    ITEM_PAGE_UNLOADED,
 } from "../../constants/actionTypes";
 
 const mapStateToProps = (state) => ({
-  ...state.item,
-  currentUser: state.common.currentUser,
+    ...state.item,
+    currentUser: state.common.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoad: (payload) => dispatch({ type: ITEM_PAGE_LOADED, payload }),
-  onUnload: () => dispatch({ type: ITEM_PAGE_UNLOADED }),
+    onLoad: (payload) => dispatch({ type: ITEM_PAGE_LOADED, payload }),
+    onUnload: () => dispatch({ type: ITEM_PAGE_UNLOADED }),
 });
 
 class Item extends React.Component {
-  componentWillMount() {
-    this.props.onLoad(
-      Promise.all([
-        agent.Items.get(this.props.match.params.id),
-        agent.Comments.forItem(this.props.match.params.id),
-      ])
-    );
-  }
-
-  componentWillUnmount() {
-    this.props.onUnload();
-  }
-
-  render() {
-    if (!this.props.item) {
-      return null;
+    componentWillMount() {
+        this.props.onLoad(
+            Promise.all([
+                agent.Items.get(this.props.match.params.id),
+                agent.Comments.forItem(this.props.match.params.id),
+            ])
+        );
     }
 
-    const markup = {
-      __html: marked(this.props.item.description, { sanitize: true }),
-    };
-    const canModify =
-      this.props.currentUser &&
-      this.props.currentUser.username === this.props.item.seller.username;
-    const itemImage = this.props.item.image ? this.props.item.image : "../placeholder.png";
-    return (
-      <div className="container page">
+    componentWillUnmount() {
+        this.props.onUnload();
+    }
+
+    render() {
+        if (!this.props.item) {
+            return null;
+        }
+
+        const markup = {
+            __html: marked(this.props.item.description, { sanitize: true }),
+        };
+        const canModify =
+            this.props.currentUser &&
+            this.props.currentUser.username === this.props.item.seller.username;
+        const itemImage = this.props.item.image ? this.props.item.image : "../placeholder.png";
+        return (
+            <div className="container page">
         <div className="text-dark">
           <div className="row bg-white p-4">
             <div className="col-6">
@@ -82,8 +82,8 @@ class Item extends React.Component {
           </div>
         </div>
       </div>
-    );
-  }
+        );
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Item);
